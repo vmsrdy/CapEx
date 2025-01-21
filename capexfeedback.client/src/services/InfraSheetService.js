@@ -1,7 +1,7 @@
 import apiService from './apiService';
 
 const InfraSheetService = {
-  uploadInfraSheetFile: async (response) => {
+  uploadInfraSheetFile: async (file) => {
     const formData = new FormData();
     formData.append('file', file);
 

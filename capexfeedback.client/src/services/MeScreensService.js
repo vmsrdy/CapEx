@@ -13,6 +13,17 @@ const MeScreenService = {
     } catch (error) {
       throw new Error(error.response ? error.response.data : 'Failed to fetch IeDetails');
     }
+  },
+
+  submitMeScreenFormStatus: async (status)=>{
+      try{
+        const MeResponse = await apiService.post(status);
+      return MeResponse
+      }
+      catch(error){
+        console.error('Error submitting MeScreen status: ', error)
+        return null;
+      }
   }
 };
 
