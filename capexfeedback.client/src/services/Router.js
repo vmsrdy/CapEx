@@ -6,7 +6,7 @@ import Dashboard from "./components/views/Dashboard"
 import InitiateFeedback from "./components/views/InitiateFeedback"
 import IeFeedback from "../views/capex-feedback/IeFeedback"
 import MeScreens from "../views/capex-feedback/MeScreens"
-// import MaintainenceForm from "./components/views/MaintainenceForm"
+import MaintainenceForm from "../views/capex-feedback/MaintainenceForm"
 // import ProjectForm from "./components/views/PrForm"
 import { Route, Routes } from "react-router-dom"
 
@@ -28,7 +28,7 @@ function Router() {
               <Route path="/ie-feedback" element={<IeFeedback />} />
               <Route path="/me-screens" element={<MeScreens />} />
               {/* <Route path="/me-screens" element={<MeScreens />} /> */}
-              {/* <Route path="/maintainence-form" element={<MaintainenceForm />} /> */}
+              <Route path="/maintenance-form" element={<MaintainenceForm />} />
               {/* <Route path="/project-form" element={<ProjectForm />} /> */}
             </Routes>
           </main>

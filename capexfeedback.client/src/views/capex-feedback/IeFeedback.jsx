@@ -26,7 +26,7 @@ const checkoutSchema = yup.object().shape({
 export default function IeFeedback({ buttonAbstract, MeAbstract, mainAbs }) {
   const isNonMobile = useMediaQuery("(min-width:600px)");
 
-  const[initialValues, setInitialValues] = React.useState({});
+  const [initialValues, setInitialValues] = React.useState({});
 
   useEffect(() => {
     const fetchPrValues = async () => {
