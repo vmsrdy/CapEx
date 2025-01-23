@@ -39,7 +39,6 @@ export default function IeFeedback({ buttonAbstract, MeAbstract, mainAbs }) {
         value: response[field.name] || field.value,
       }));
 
-      // Persist changes into fieldValuespr if necessary
       fieldValuespr.splice(0, fieldValuespr.length, ...updatedFieldValues);
 
       console.log("This is the response:", response);

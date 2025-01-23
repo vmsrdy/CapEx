@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "87QQnttokW/KFN0zuSSBDskL6xSEKYjGfihKCHMV0zE=",
+  "Source": "capexfeedback.Server",
+  "BasePath": "_content/capexfeedback.Server",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "C:\\Users\\Madhu\\Downloads\\CapEx-Latest\\CapEx-Latest\\capexfeedback.client\\capexfeedback.client.esproj",
+      "Version": 2,
+      "Source": "capexfeedback.client",
+      "GetPublishAssetsTargets": "GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

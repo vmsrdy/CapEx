@@ -1,6 +1,7 @@
 import { Box, IconButton, useTheme, Typography } from "@mui/material";
 import { useContext } from "react";
 import { ColorModeContext, tokens } from "../../theme"
+import TataLogo from '../../assets/TataLogo.png'
 // import { ColorModeContext, tokens} from "../../theme"
 // import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 // import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
@@ -36,7 +37,7 @@ const Topbar = () => {
           alignItems: 'center',
         }}
       >
-        <img alt="T" src="../../../assets/react.svg" style={{ width: '50px' }} />
+        <img alt="T" src={TataLogo} style={{ width: '50px' }} />
         <Typography
           variant="h2"
           sx={{ marginLeft: 2, color: '#ffffff', fontWeight: 'bold' }}

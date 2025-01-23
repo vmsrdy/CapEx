@@ -1,9 +1,9 @@
-import React, { forwardRef, useEffect } from "react";
-import { Box, TextField } from "@mui/material";
+import React, { forwardRef, useEffect, useState } from "react";
+import { Box, TextField, CircularProgress } from "@mui/material";
 import { Formik, useFormikContext } from "formik";
 import * as yup from "yup";
 
-const AutoTouchFields = ({ fieldValues }) => {
+const AutoTouchFields = ({ fieldValues, setLoading }) => {
   const { setTouched } = useFormikContext();
 
   useEffect(() => {
@@ -11,15 +11,18 @@ const AutoTouchFields = ({ fieldValues }) => {
       acc[name] = true;
       return acc;
     }, {});
-    setTouched(touchedFields, true);
+      const setTimer = setTimeout(() => {
+          setTouched(touchedFields, true);
+          setLoading(false);
+      }, 3000)
   }, [fieldValues, setTouched]);
 
   return null;
 };
 
 const MainForm = forwardRef(({ y, handlePRFormSubmit, fieldValues, isNonMobile }, ref) => {
-  // Refine validation schema dynamically based on field names and requirements
-  console.log(y)
+  const [loading, setLoading] = useState(true);
+
   const validationSchema = yup.object().shape(
     fieldValues.reduce((acc, { name, label }) => {
       acc[name] = yup
@@ -28,14 +31,15 @@ const MainForm = forwardRef(({ y, handlePRFormSubmit, fieldValues, isNonMobile }
         .required(`${label} unable to fetch.`)
         .max(50, `${label} must not exceed 50 characters.`);
       return acc;
+
     }, {})
   );
 
+  // const [prVals, setprVals]= useState();
   let prValueCapture = {};
 
   return (
     <Formik
-      onSubmit={handlePRFormSubmit}
       validationSchema={validationSchema}
       innerRef={ref}
       initialValues={
@@ -43,7 +47,9 @@ const MainForm = forwardRef(({ y, handlePRFormSubmit, fieldValues, isNonMobile }
           acc[name] = value || "";
           if (acc.po !== "") {
             prValueCapture = acc;
+
           }
+
           return prValueCapture;
         }, {})
       }
@@ -57,8 +63,7 @@ const MainForm = forwardRef(({ y, handlePRFormSubmit, fieldValues, isNonMobile }
       }) => (
         <form onSubmit={handleSubmit}>
 
-          {y && <AutoTouchFields fieldValues={fieldValues} />}
-          {/* {console.log(prValueCapture)} */}
+                  {!y && <AutoTouchFields fieldValues={fieldValues} setLoading={setLoading} />}
           <Box
             display="grid"
             gap="20px"
@@ -79,18 +84,20 @@ const MainForm = forwardRef(({ y, handlePRFormSubmit, fieldValues, isNonMobile }
                 fullWidth
                 variant="outlined"
                 type="text"
-                disabled= {true}
                 label={label}
                 onBlur={(e) => {
                   handleBlur(e);
                   setFieldTouched(name, true, true);
                 }}
-                onChange={handleChange}
+                // onChange={handleChange}
                 value={prValueCapture[name]}
                 name={name}
                 error={prValueCapture[name] === "" && !!errors[name]}
                 helperText={prValueCapture[name] === "" && errors[name]}
                 color="primary"
+                InputProps={{
+                  endAdornment: loading && <CircularProgress size={20} />,
+                }}
               />
             ))}
           </Box>
