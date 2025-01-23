@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, List, ListItem, ListItemIcon, ListItemText, Typography, IconButton, Drawer } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import NotStartedIcon from "@mui/icons-material/NotStarted";
 import RateReviewIcon from "@mui/icons-material/RateReview";
@@ -11,12 +11,21 @@ import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
 import PieChartOutlineOutlinedIcon from "@mui/icons-material/PieChartOutlineOutlined";
 import TimelineOutlinedIcon from "@mui/icons-material/TimelineOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import ListAltIcon from '@mui/icons-material/ListAlt';
 import './Sidebar.css';
 
 const Sidebar = ({ isSidebar, setIsSidebar }) => {
+  const navigate = useNavigate(); // Initialize navigate
+  const someId = "No PR number found"; // Example dynamic ID, replace it with your actual dynamic value
+
   const menuItems = [
     { title: "Dashboard", to: "/dashboard", icon: <HomeOutlinedIcon /> },
-    { title: "Initiate Feedback", to: "/initiate-feedback", icon: <NotStartedIcon /> },
+    { title: "Machine Form", to: "/machine-form", icon: <ListAltIcon /> },
+    {
+      title: "Initiate Feedback",
+      onClick: () => navigate(`/initiate-feedback/${someId}`),
+      icon: <NotStartedIcon />
+    },
     { title: "IE Feedback", to: "/ie-feedback", icon: <RateReviewIcon /> },
     { title: "ME Screens", to: "/me-screens", icon: <BrandingWatermarkIcon /> },
     { title: "Maintenance Form", to: "/maintenance-form", icon: <EngineeringIcon /> },
@@ -32,28 +41,27 @@ const Sidebar = ({ isSidebar, setIsSidebar }) => {
 
   return (
     <Drawer
-  sx={{
-    width: isSidebar ? 250 : 80,
-    flexShrink: 0,
-    transition: "width 0.5s ease-in-out",
-    "& .MuiDrawer-paper": {
-      width: isSidebar ? 250 : 80,
-      transition: "width 0.5s ease-in-out",
-      boxSizing: "border-box",
-      zIndex: 1100, // Ensure sidebar stays on top
-      overflow: "hidden",
-    },
-    position: "fixed",
-    left: 0,
-    top: 0,
-    bottom: 0,
-    boxShadow: "1px 0px 10px 0px rgba(0, 0, 0, 0.2)",
-  }}
-  variant="persistent"
-  anchor="left"
-  open={isSidebar || !isSidebar}
->
-
+      sx={{
+        width: isSidebar ? 250 : 80,
+        flexShrink: 0,
+        transition: "width 0.5s ease-in-out",
+        "& .MuiDrawer-paper": {
+          width: isSidebar ? 250 : 80,
+          transition: "width 0.5s ease-in-out",
+          boxSizing: "border-box",
+          zIndex: 1100, // Ensure sidebar stays on top
+          overflow: "hidden",
+        },
+        position: "fixed",
+        left: 0,
+        top: 0,
+        bottom: 0,
+        boxShadow: "1px 0px 10px 0px rgba(0, 0, 0, 0.2)",
+      }}
+      variant="persistent"
+      anchor="left"
+      open={isSidebar || !isSidebar}
+    >
       {/* Toggle Icon */}
       <Box
         sx={{
@@ -70,12 +78,17 @@ const Sidebar = ({ isSidebar, setIsSidebar }) => {
         </IconButton>
       </Box>
 
-
-
       {/* Menu Items */}
       <List sx={{ marginTop: "108px" }}>
         {menuItems.map((item) => (
-          <ListItem sx={{justifyContent: 'center'}} button key={item.title} component={Link} to={item.to}>
+          <ListItem
+            sx={{justifyContent: 'center', border: 'none', outline: 'none'}}
+            button
+            key={item.title}
+            component={item.onClick ? "button" : Link}
+            to={item.to}
+            onClick={item.onClick ? item.onClick : undefined}
+          >
             <ListItemIcon sx={{
               justifyContent: isSidebar ? "flex-start" : "center"
             }}>{item.icon}</ListItemIcon>
@@ -94,14 +107,13 @@ const Sidebar = ({ isSidebar, setIsSidebar }) => {
       </Box>
       <List>
         {chartItems.map((item) => (
-          <ListItem button key={item.title} sx={{justifyContent: 'center'}}  component={Link} to={item.to}>
+          <ListItem button key={item.title} sx={{justifyContent: 'center'}} component={Link} to={item.to}>
             <ListItemIcon sx={{ justifyContent: "center" }}>{item.icon}</ListItemIcon>
             {isSidebar && <ListItemText primary={item.title} />}
           </ListItem>
         ))}
       </List>
     </Drawer>
-
   );
 };
 

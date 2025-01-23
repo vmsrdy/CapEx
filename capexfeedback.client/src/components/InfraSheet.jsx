@@ -21,7 +21,7 @@ export default function InfraSheet({ buttonAbstract, MeAbstract, mainAbs }) {
     blockAndEquilibrium: '--Block and Equilibrium--'
   });
 
-  const [loading, setLoading] = useState(true); // Loading state to manage fetching data
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchIeDetails = async () => {
@@ -34,7 +34,7 @@ export default function InfraSheet({ buttonAbstract, MeAbstract, mainAbs }) {
         setLoading(false); // Data fetched, set loading to false
       } catch (error) {
         console.error("Error fetching IE details:", error);
-        setLoading(false); // Stop loading even if there is an error
+        setLoading(false);
       }
     };
 

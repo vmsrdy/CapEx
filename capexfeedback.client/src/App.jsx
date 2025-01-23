@@ -10,6 +10,7 @@ import { ColorModeContext, useMode } from "./theme";
 import MeScreens from './views/capex-feedback/MeScreens'
 import MaintainenceForm from './views/capex-feedback/MaintainenceForm'
 import ProjectForm from './views/capex-feedback/ProjectForm'
+import MachineForm from './views/capex-feedback/MachineForm'
 
 function App() {
   const [theme, colorMode] = useMode();
@@ -33,11 +34,12 @@ function App() {
           >
             <Topbar setIsSidebar={setIsSidebar} />
             <Routes>
-              <Route path="/initiate-feedback" element={<InitiateFeedback />} />
+              <Route path="/initiate-feedback/:id" element={<InitiateFeedback />} />
               <Route path="/ie-feedback" element={<IeFeedback />} />
               <Route path="/me-screens" element={<MeScreens />} />
               <Route path="/maintenance-form" element={<MaintainenceForm />} />
               <Route path="/project-form" element={<ProjectForm />} />
+              <Route path="/machine-form" element={<MachineForm />} />
               {/* Add other routes here */}
             </Routes>
           </main>
